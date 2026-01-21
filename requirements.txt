@@ -1,0 +1,6 @@
+numpy 
+matplotlib
+
+# Recommended for data handling and advanced math:
+pandas 
+scipy
