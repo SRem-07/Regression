@@ -19,11 +19,14 @@ class RidgeRegression:
     plot_gcv(gcv_scores, alphas_to_test, lmbda)
     
     # Use the normal equation
-    self.theta = np.linalg.pinv(self.X_b.T @ self.X_b + lmbda * np.identity(X.shape[1])) @ self.X_b.T @ y
+    self.theta = np.linalg.pinv(self.X_b.T @ self.X_b + lmbda * np.identity(self.X_b.shape[1])) @ self.X_b.T @ y
     
     return self.theta
     
   def predict(self, X):
+    # Add column of ones if not included
+    self.X_b = ensure_intercept(X)
+    
     # Predict values
     predictions_vector = self.X_b @ self.theta
     return predictions_vector
@@ -44,8 +47,22 @@ class LinearRegression:
     return self.theta
     
   def predict(self, X): 
+    # Add column of ones if not included
+    self.X_b = ensure_intercept(X)
+    
     # Predict values
     predictions_vector = self.X_b @ self.theta
     
     return predictions_vector
+  
+  
+class PolynomialRegression:
+  def __init__(self):
+    self.theta = None
+    
+  def fit(self, X, y):
+    pass
+  
+  def predict(self, X):
+    pass
   

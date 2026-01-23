@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt # type: ignore
+from mpl_toolkits.mplot3d import Axes3D
 import numpy as np # type: ignore
 
 class Plot:
@@ -25,7 +26,7 @@ class Plot:
     
   
   @staticmethod
-  def explorator_plot_3D(X, y):
+  def exploratory_plot_3D(X, y):
     """
     Create a 3D plot for inital data exploration
     
@@ -49,7 +50,7 @@ class Plot:
     ax.set_xlabel('Explanatory Variable 1')
     ax.set_ylabel('Explanatory Variable 2')
     ax.set_zlabel('Response Variable')
-    plt.show
+    plt.show()
     
     
   @staticmethod
@@ -89,7 +90,7 @@ class Plot:
     
     
   @staticmethod
-  def plot_3D_linear_trend(X, y, beta_hat, plot_title, exp1_title = "Explanatory Variable 1", exp2_title = "Explanatory Variable 2", predictor_title = "Response Variable"):
+  def plot_3D_linear_trend(X, y, beta_hat, plot_title = "Scatter Plot", exp1_title = "Explanatory Variable 1", exp2_title = "Explanatory Variable 2", predictor_title = "Response Variable"):
     """
     Create a 3D plot for with regression plot
     
@@ -119,7 +120,7 @@ class Plot:
     
     # Create grids and get prediction grid
     X1_grid, X2_grid = np.meshgrid(x1_range, x2_range)
-    y_predicted_grid = intercept + slope1 * X1_grid + X2 * X2_grid
+    y_predicted_grid = intercept + slope1 * X1_grid + slope2 * X2_grid
     
     # Create and show scatter plot with trendline
     fig = plt.figure(figsize = (10, 7))
