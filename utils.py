@@ -10,3 +10,4 @@ def ensure_intercept(X):
     if not has_intercept:
         return np.c_[np.ones((X.shape[0], 1)), X]
     return X
+

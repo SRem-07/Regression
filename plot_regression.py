@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt # type: ignore
-from mpl_toolkits.mplot3d import Axes3D
+
 import numpy as np # type: ignore
 
 class Plot:
@@ -54,7 +54,7 @@ class Plot:
     
     
   @staticmethod
-  def plot_2D_linear_trend(X, y, beta_hat, plot_title = "Scatter Plot", x_label = "Explanatory Variable", y_label = "Response Variable"):
+  def plot_2D_linear_trend(X, y, model, plot_title = "Scatter Plot", x_label = "Explanatory Variable", y_label = "Response Variable"):
     """
     Create a 2D plot with regression line
     
@@ -71,17 +71,14 @@ class Plot:
         The function displays a plot but does not return a value
   """
     
-    # Get coefficients of regression
-    intercept, slope = beta_hat[0], beta_hat[1]
-    
     # Get range of X and create trendline
-    x_range = np.linspace(np.min(X) - 0.5, np.max(X) + 0.5, 100)
-    y_trendline = intercept + slope * x_range
+    x_range = np.linspace(np.min(X) - 0.5, np.max(X) + 0.5, 100).reshape(-1, 1) # Ensure x_range is a column vector
+    y_trendline = model.predict(x_range)
     
     # Create and show scatter plot with trendline
     plt.figure(figsize = (8, 5))
     plt.scatter(X, y, color = 'teal', label = "Data", alpha = 0.6)
-    plt.plot(x_range, y_trendline, color = 'red', linestyle = '-', linewidth = 2, label = f"Line: y = {float(slope):.2f}x + {float(intercept):.2f}")
+    plt.plot(x_range, y_trendline, color = 'red', linestyle = '-', linewidth = 2, label = f"Trendline")
     plt.title(plot_title)
     plt.xlabel(x_label)
     plt.ylabel(y_label)
@@ -90,7 +87,7 @@ class Plot:
     
     
   @staticmethod
-  def plot_3D_linear_trend(X, y, beta_hat, plot_title = "Scatter Plot", exp1_title = "Explanatory Variable 1", exp2_title = "Explanatory Variable 2", predictor_title = "Response Variable"):
+  def plot_3D_linear_trend(X, y, model, plot_title = "Scatter Plot", exp1_title = "Explanatory Variable 1", exp2_title = "Explanatory Variable 2", predictor_title = "Response Variable"):
     """
     Create a 3D plot for with regression plot
     
@@ -111,16 +108,16 @@ class Plot:
     # Slice X array into two arrays
     X1, X2 = X[:, 0], X[:, 1]
     
-    # Get coefficients of regression
-    intercept, slope1, slope2 = beta_hat[0], beta_hat[1], beta_hat[2]
-    
     # Get range of both explanatory variables
     x1_range = np.linspace(np.min(X1), np.max(X2), 20)
     x2_range = np.linspace(np.min(X2), max(X2), 20)
     
     # Create grids and get prediction grid
     X1_grid, X2_grid = np.meshgrid(x1_range, x2_range)
-    y_predicted_grid = intercept + slope1 * X1_grid + slope2 * X2_grid
+  
+    # Flatten grid and predict
+    grid_points = np.c_[X1_grid.ravel(), X2_grid.ravel()]
+    y_predicted_grid = model.predict(grid_points).reshape(X1_grid.shape)
     
     # Create and show scatter plot with trendline
     fig = plt.figure(figsize = (10, 7))
