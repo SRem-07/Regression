@@ -1,6 +1,6 @@
 import numpy as np # type: ignore
 import matplotlib.pyplot as plt # type: ignore
-from utils import ensure_intercept
+from .utils import ensure_intercept
 
 
 def ridge_regression_gcv_score(X, y, alpha):
@@ -24,11 +24,13 @@ def ridge_regression_gcv_score(X, y, alpha):
   # Compute the coefficients (beta_hat) using the normal equation
   XTX = X.T @ X
   # Add regularisation term
-  XTX_reg = XTX + alpha * np.eye(p)
+  identity = np.eye(p)
+  identity[0, 0] = 0
+  XTX_reg = XTX + alpha * identity
   # Compute the inverse
   try: 
     inv_XTX_reg = np.linalg.pinv(XTX_reg)
-  except np.linag.LinAlgError:
+  except np.linalg.LinAlgError:
     return np.inf
   
   beta_hat = inv_XTX_reg @ X.T @ y

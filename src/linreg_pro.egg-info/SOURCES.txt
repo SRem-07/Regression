@@ -1,0 +1,12 @@
+pyproject.toml
+setup.py
+src/LinReg/__init__.py
+src/LinReg/gcv.py
+src/LinReg/model.py
+src/LinReg/plot_regression.py
+src/LinReg/utils.py
+src/linreg_pro.egg-info/PKG-INFO
+src/linreg_pro.egg-info/SOURCES.txt
+src/linreg_pro.egg-info/dependency_links.txt
+src/linreg_pro.egg-info/requires.txt
+src/linreg_pro.egg-info/top_level.txt

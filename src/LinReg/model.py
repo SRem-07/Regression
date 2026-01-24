@@ -1,16 +1,17 @@
 import numpy as np # type: ignore
 import matplotlib.pyplot as plt #type: ignore
 
-from gcv import find_optimal_alpha, plot_gcv
-from utils import ensure_intercept
+from .gcv import find_optimal_alpha, plot_gcv
+from .utils import ensure_intercept
 
 class RidgeRegression:
-  def __init__(self, order = 1):
+  def __init__(self):
     self.theta = None
     self.X_b = None
+    self.y = None
     self.samples = None
     self.predictors_num = None
-    self.order = order
+    self.order = None
     
   def add_polynomial_features(self, X, order):
     """
@@ -18,12 +19,13 @@ class RidgeRegression:
     """
     
     X_poly = X.copy()
-    
-    # Concatenate columns with polynomial terms
+    if X_poly.ndim == 1:
+      X_poly = X_poly.reshape(-1, 1)
+            
     for d in range(2, order + 1): 
-        X_poly = np.c_[X_poly, X ** d]
-        
+      X_poly = np.c_[X_poly, X ** d]
     return X_poly
+        
     
   def fit(self, X, y, alphas_to_test, order = 1):
     # Update sample size and number of predictors
@@ -36,15 +38,20 @@ class RidgeRegression:
     # Update self.y with training data
     self.y = y
     
+    # Update self.order with order passed into function
+    self.order = order
+    
     # Expand features if order > 1
-    if order > 1:
-      self.X_b = self.add_polynomial_features(X, order)
+    if self.order > 1:
+      features = self.add_polynomial_features(X, order)
+    else:
+      features = X
     
     # Add a column of ones to X for intercept if required
-    self.X_b = ensure_intercept(X)
+    self.X_b = ensure_intercept(features)
     
     # Get lambda by finding value that minimises GCV (start with logspace, then use linspace)
-    lmbda, gcv_scores = find_optimal_alpha(X, y, alphas_to_test)
+    lmbda, gcv_scores = find_optimal_alpha(features, y, alphas_to_test)
     
     # Plot GCV scores for further refinement
     plot_gcv(gcv_scores, alphas_to_test, lmbda)
@@ -59,13 +66,15 @@ class RidgeRegression:
   def predict(self, X):
     # Add polynomial features if order > 1
     if self.order > 1:
-      X = self.add_polynomial_features(X, self.order)
+      X_p = self.add_polynomial_features(X, self.order)
+    else:
+      X_p = X
     
     # Add a column of ones to X for intercept if required
-    X_b = ensure_intercept(X)
+    X_b_prediction = ensure_intercept(X_p)
     
     # Predict values
-    predictions_vector = self.X_b @ self.theta
+    predictions_vector = X_b_prediction @ self.theta
     return predictions_vector
   
   
@@ -107,13 +116,13 @@ class LinearRegression:
   
   
 class PolynomialRegression:
-  def __init__(self, order = 2):
+  def __init__(self):
     self.theta = None
     self.X_b = None
     self.y = None
     self.samples = None
     self.predictors_num = None
-    self.order = order
+    self.order = None
     
   def add_polynomial_features(self, X, order):
     """
@@ -121,6 +130,8 @@ class PolynomialRegression:
     """
     
     X_poly = X.copy()
+    if X_poly.ndim == 1:
+      X_poly = X_poly.reshape(-1, 1)
     
     # Concatenate columns with polynomial terms
     for d in range(2, order + 1): 
