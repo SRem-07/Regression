@@ -9,7 +9,6 @@ setup(
         "numpy",
         "matplotlib",
         "pandas",
-        "scipy",
     ],
     python_requires=">=3.8",
 )
