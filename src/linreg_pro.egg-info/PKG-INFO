@@ -2,7 +2,7 @@ Metadata-Version: 2.4
 Name: linreg_pro
 Version: 0.1.0
 Summary: A comprehensive suite for Ridge, Linear, and Polynomial regression with GCV optimization.
-Author-email: Your Name <your.email@example.com>
+Author-email: Samuel Remeljej <sremeljej@gmail.com>
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
@@ -11,5 +11,19 @@ Description-Content-Type: text/markdown
 Requires-Dist: numpy
 Requires-Dist: matplotlib
 Requires-Dist: pandas
-Requires-Dist: scipy
 Dynamic: requires-python
+
+# LinearReg Library
+
+A specialized Python library for **Linear, Polynomial, and Ridge Regression**. This package features built-in **Generalised Cross-Validation (GCV)** to automatically find the optimal regularization parameter ($\lambda$).
+
+## Features
+* **Polynomial Expansion**: Easily transform linear features into higher-order terms.
+* **Ridge Regularization**: Prevents overfitting by adding an $L_2$ penalty: $\|y - X\beta\|^2 + \lambda \|\beta\|^2$.
+* **Automated Tuning**: Uses GCV to select $\lambda$ without needing a separate validation set.
+* **Visualization**: 2D and 3D plotting tools to visualize regression surfaces and trendlines.
+
+## Installation
+From the project root, install in editable mode:
+```bash
+pip install -e .

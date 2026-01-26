@@ -4,7 +4,11 @@ def ensure_intercept(X):
     """
     Checks if a column of ones exists. If not, adds one to the start of X.
     """
+    
+    X = np.asarray(X)
     # Check if any column is all ones
+    if X.ndim == 1:
+        X = X.reshape(-1, 1)
     has_intercept = np.any(np.all(X == 1, axis=0))
     
     if not has_intercept:

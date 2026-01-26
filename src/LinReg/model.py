@@ -17,6 +17,7 @@ class RidgeRegression:
     """
     Expands matrix X to include polynomial terms up to the specified degree. If X has multiple columns, it expands each one
     """
+    X = np.asarray(X)
     
     X_poly = X.copy()
     if X_poly.ndim == 1:
@@ -28,6 +29,10 @@ class RidgeRegression:
         
     
   def fit(self, X, y, alphas_to_test, order = 1):
+    # Ensure X and y area arrays
+    X = np.asarray(X)
+    y = np.asarray(y)
+    
     # Update sample size and number of predictors
     self.samples = np.size(y)
     try:
@@ -64,6 +69,9 @@ class RidgeRegression:
     return self.theta
     
   def predict(self, X):
+    # Make X a numpy array
+    X = np.asarray(X)
+    
     # Add polynomial features if order > 1
     if self.order > 1:
       X_p = self.add_polynomial_features(X, self.order)
@@ -87,6 +95,10 @@ class LinearRegression:
     self.predictors_num = None
     
   def fit(self, X, y):
+    # Ensure X and y area arrays
+    X = np.asarray(X)
+    y = np.asarray(y)
+    
     # Update sample size and number of predictors
     self.samples = np.size(y)
     try:
@@ -106,6 +118,9 @@ class LinearRegression:
     return self.theta
     
   def predict(self, X): 
+    # Make X a numpy array
+    X = np.asarray(X)
+    
     # Add column of ones if not included
     X_b = ensure_intercept(X)
     
@@ -128,6 +143,7 @@ class PolynomialRegression:
     """
     Expands matrix X to include polynomial terms up to the specified degree. If X has multiple columns, it expands each one
     """
+    X = np.asarray(X)
     
     X_poly = X.copy()
     if X_poly.ndim == 1:
@@ -140,6 +156,10 @@ class PolynomialRegression:
     return X_poly
     
   def fit(self, X, y, order = 2):
+    # Ensure X and y area arrays
+    X = np.asarray(X)
+    y = np.asarray(y)
+    
     # Update sample size and number of predictors
     self.samples = np.size(y)
     try:
@@ -165,6 +185,9 @@ class PolynomialRegression:
     return self.theta
   
   def predict(self, X):
+    # Make X a numpy array
+    X = np.asarray(X)
+    
     # Add polynomial features
     X_poly = self.add_polynomial_features(X, self.order)
     
@@ -203,7 +226,7 @@ class RegressionStatistics:
     y_mean = np.mean(y_true)
     n = self.model.samples # Total sample
     k = self.model.predictors_num # Number of predictors
-    y_fitted = self.model.predict(self.model.X_b)
+    y_fitted = self.model.X_b @ self.model.theta
      
     # Calculate key sum of squares 
     ss_residuals = np.sum((y_true - y_fitted) ** 2)
