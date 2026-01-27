@@ -11,6 +11,7 @@ Description-Content-Type: text/markdown
 Requires-Dist: numpy
 Requires-Dist: matplotlib
 Requires-Dist: pandas
+Requires-Dist: scipy
 Dynamic: requires-python
 
 # LinearReg Library

@@ -223,7 +223,7 @@ class RegressionStatistics:
   def calculate_regression_statistics(self):
     # Get key statistics/fitted values from model
     y_true = self.model.y
-    y_mean = np.mean(self.y_true)
+    y_mean = np.mean(y_true)
     n = self.model.samples # Total sample
     k = self.model.predictors_num # Number of predictors
     y_fitted = self.model.X_b @ self.model.theta
