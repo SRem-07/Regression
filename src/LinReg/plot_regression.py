@@ -144,7 +144,7 @@ class Plot:
     y_fitted = model.X_b @ model.theta
     
     # Calculate residuals
-    residuals = y_true = y_fitted
+    residuals = y_true - y_fitted
     
     # Create subplots
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize = (12, 5))
