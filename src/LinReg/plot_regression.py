@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt # type: ignore
-
 import numpy as np # type: ignore
+import scipy.stats as stats
 
 class Plot:
   @staticmethod
@@ -133,3 +133,35 @@ class Plot:
     ax.set_zlabel(predictor_title)
     
     plt.show()
+  
+  @staticmethod
+  def plot_diagnostics(model):
+    """"
+      Generates diagnostic plots to check regression assumptions
+    """
+    # Get data from model
+    y_true = model.y
+    y_fitted = model.X_b @ model.theta
+    
+    # Calculate residuals
+    residuals = y_true = y_fitted
+    
+    # Create subplots
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize = (12, 5))
+    
+    # Create residual v fitted plot
+    ax1.scatter(y_fitted, residuals, alpha = 0.5, edgecolors = 'k')
+    ax1.axhline(0, color = 'red', linestyle = '--')
+    ax1.set_title("Residals vs Fitted")
+    ax1.set_xlabel("Fitted")
+    ax1.set_ylabel("Residuals")
+    
+    # Create QQ plot
+    stats.probplot(residuals, dist = 'norm', plot = ax2)
+    ax2.set_title('Normal Q-Q')
+    
+    plt.tight_layout()
+    plt.show()
+    
+    
+    
