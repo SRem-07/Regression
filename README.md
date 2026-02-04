@@ -14,7 +14,7 @@ A specialized Python library for **Linear, Polynomial, and Ridge Regression**. T
 * SciPy
 
 ## Overview
-This linear regression library solely uses NumPy to perform regressions, as well as Matplotlib to create all plots. This project was developed as my fris tmajor coding project to bridge the gap between statistical theory, my current area of study, and programming.
+This linear regression library solely uses NumPy to perform regressions, as well as Matplotlib to create all plots. This project was developed as my first major coding project to bridge the gap between statistical theory, my current area of study, mathematics, and programming.
 
 This project developed from a simple coding exercise and I applied and learnt some new regression techniques including: the Normal Equation, Ridge Regression, Polynomial Regression and Generalised Cross-Validation. 
 
