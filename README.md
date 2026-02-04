@@ -8,8 +8,13 @@ A specialized Python library for **Linear, Polynomial, and Ridge Regression**. T
 * **Automated Tuning**: Uses GCV to select the optimal $\lambda$ without the computational overhead of standard cross-validation.
 * **Diagnostics & Visualization**: Built-in tools for 2D/3D plotting, Residual analysis, and Q-Q plots.
 
+## Tech Stack
+* NumPy
+* Matplotlib
+* SciPy
+
 ## Overview
-This linear regression library solely uses Numpy to perform regressions, as welll as Matplotlib to create all plots. This project was developed as my fris tmajor coding project to bridge the gap between statistical theory, my current area of study, and programming.
+This linear regression library solely uses NumPy to perform regressions, as well as Matplotlib to create all plots. This project was developed as my fris tmajor coding project to bridge the gap between statistical theory, my current area of study, and programming.
 
 This project developed from a simple coding exercise and I applied and learnt some new regression techniques including: the Normal Equation, Ridge Regression, Polynomial Regression and Generalised Cross-Validation. 
 
