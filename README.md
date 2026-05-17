@@ -1,6 +1,6 @@
 # LinReg Library
 
-A specialized Python library for **Linear, Polynomial, and Ridge Regression**. This package features built-in **Generalised Cross-Validation (GCV)** to automatically find the optimal regularization parameter ($\lambda$).
+A specialized Python library for **Linear, Polynomial, and Ridge Regression**. This package features built-in **Generalised Cross-Validation (GCV)** to automatically find the optimal regularisation parameter ($\lambda$).
 
 ## Features
 * **Polynomial Expansion**: Transform linear features into higher-order terms automatically.

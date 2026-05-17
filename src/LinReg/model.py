@@ -29,7 +29,7 @@ class RidgeRegression:
         
     
   def fit(self, X, y, alphas_to_test, order = 1):
-    # Ensure X and y area arrays
+    # Ensure X and y are arrays
     X = np.asarray(X)
     y = np.asarray(y)
     
@@ -271,6 +271,7 @@ class RegressionStatistics:
   @property
   def f_statistic(self):
     return self._f_statistic  
+  
   
   
   
